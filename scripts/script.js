@@ -12,12 +12,12 @@ editPopupButton.addEventListener('click', showEditPopup);
 colosePopupButton.addEventListener('click', closeEditPopup);
 
 
-savePopupButton.addEventListener('click', 
-function(e){
-       e.preventDefault();
-       nameProfile.textContent = nameInput.value;
-       descriptionProfile.textContent = descriptionInput.value;
-       closeEditPopup();
+savePopupButton.addEventListener('click',
+    function (e) {
+        e.preventDefault();
+        nameProfile.textContent = nameInput.value;
+        descriptionProfile.textContent = descriptionInput.value;
+        closeEditPopup();
     }
 );
 
@@ -33,8 +33,8 @@ function closeEditPopup() {
 }
 
 function showEditPopup() {
-    nameInput.value =  nameProfile.textContent;
-    descriptionInput.value =  descriptionProfile.textContent;
+    nameInput.value = nameProfile.textContent;
+    descriptionInput.value = descriptionProfile.textContent;
     editPopup.classList.add("popup_active");
 }
 

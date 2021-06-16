@@ -1,7 +1,13 @@
 .profile__info-container {
-    padding-right: 30px;
-    padding-left: 30px;
-    width: 100%;
-    color: #fff;
+  padding-right: 30px;
+  padding-left: 30px;
+  width: 100%;
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__info-container {
+    text-align: center;
+    padding: 26px 0 36px;
   }
-  
+}

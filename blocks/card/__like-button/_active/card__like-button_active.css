@@ -1,9 +1,8 @@
-.card__like-button_active
-{
-    width: 22px;
-    height: 19px;
-    border: none;
-    background-color: white;
-    background-image: url("../../../../images/card-like-black.svg");
-    background-repeat: no-repeat;
+.card__like-button_active {
+  width: 22px;
+  height: 19px;
+  border: none;
+  background-color: white;
+  background-image: url("../../../../images/card-like-black.svg");
+  background-repeat: no-repeat;
 }
