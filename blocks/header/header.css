@@ -1,0 +1,9 @@
+.header {
+  width: 880px;
+  margin: 0px auto;
+  padding-top: 45px;
+  padding-bottom: 41px;
+  min-height: 74px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  box-sizing: border-box;
+}
