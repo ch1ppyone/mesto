@@ -8,7 +8,7 @@
 }
 
 @media all and (max-width: 454px){
-  .footer__title {
+  .footer__copyright  {
     font-size: 14px;
     line-height: 17px;
   }

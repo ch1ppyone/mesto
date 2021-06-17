@@ -7,18 +7,14 @@
 
 @media all and (max-width: 1024px) {
   .footer {
-    margin: 67px 54px 60px 54px;
+    max-width: 1024px;
+    padding: 67px 54px 60px 54px;
   }
 }
 
-@media all and (max-width: 620px) {
-  .footer {
-    margin: 48px 28px 36px 28px;
-  }
-}
 
 @media all and (max-width: 454px) {
   .footer {
-    margin: 48px 19px 36px 19px;
+    padding: 48px 19px 36px 19px;
   }
 }

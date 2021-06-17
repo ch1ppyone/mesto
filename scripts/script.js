@@ -4,8 +4,8 @@ let colosePopupButton = document.querySelector(".popup__close-button");
 let savePopupButton = document.querySelector('.popup__save-button');
 let nameProfile = document.querySelector('.profile__name');
 let descriptionProfile = document.querySelector('.profile__description');
-let nameInput = document.querySelector('.popup__input_value-name');
-let descriptionInput = document.querySelector('.popup__input_value-description');
+let nameInput = document.querySelector('.popup__input_name');
+let descriptionInput = document.querySelector('.popup__input_description');
 
 
 editPopupButton.addEventListener('click', showEditPopup);

@@ -12,6 +12,8 @@
   text-align: center;
   transition: opacity 0.4s linear;
   box-sizing: border-box;
+  border: 0;
+  border-radius: 2px;
 }
 
 .popup__save-button:hover {
@@ -23,7 +25,7 @@
   .popup__save-button {
     width: 238px;
     height: 46px;
-    margin: 45px 22px 25px 22px;
+    margin: 45px 0px 25px 0px;
     font-size: 14px;
     line-height: 17px;
     padding: 14px 82px 14px 82px;

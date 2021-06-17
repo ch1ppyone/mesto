@@ -11,17 +11,16 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 882px) {
+@media screen and (max-width: 896px) {
   .cards {
     grid-template-columns: 1fr 1fr;
-    padding: 36px  0 0;
+    padding: 36px 0 0;
   }
 }
 
 @media screen and (max-width: 600px) {
   .cards {
     max-width: 282px;
-    padding-top: 36px;
     grid-template-columns: 1fr;
   }
 }

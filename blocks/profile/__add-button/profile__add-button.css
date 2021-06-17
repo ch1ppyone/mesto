@@ -13,6 +13,8 @@
   justify-self: flex-end;
   grid-column: end;
   transition: opacity 0.4s linear;
+  background-size: 22px 22px;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {
@@ -31,5 +33,6 @@
       width: 282px;
       justify-self: center;
       margin-top: 36px;
+      background-size: 16px 16px;
   }
 }
