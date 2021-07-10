@@ -1,11 +1,39 @@
-let editPopup = document.querySelector(".popup");
-let editPopupButton = document.querySelector(".profile__edit-button");
-let colosePopupButton = document.querySelector(".popup__close-button");
-let savePopupButton = document.querySelector('.popup__save-button');
-let nameProfile = document.querySelector('.profile__name');
-let descriptionProfile = document.querySelector('.profile__description');
-let nameInput = document.querySelector('.popup__input_name');
-let descriptionInput = document.querySelector('.popup__input_description');
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ]; 
+
+const editPopup = document.querySelector(".popup");
+const editPopupButton = document.querySelector(".profile__edit-button");
+const colosePopupButton = document.querySelector(".popup__close-button");
+const savePopupButton = document.querySelector('.popup__save-button');
+const nameProfile = document.querySelector('.profile__name');
+const descriptionProfile = document.querySelector('.profile__description');
+const nameInput = document.querySelector('.popup__input_type-name');
+const descriptionInput = document.querySelector('.popup__input_type-description');
 
 
 editPopupButton.addEventListener('click', showEditPopup);
