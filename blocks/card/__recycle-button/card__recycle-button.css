@@ -8,6 +8,7 @@
   position: absolute;
   top: 18px;
   left: 249px;
+  cursor: pointer;
 }
 
 .card__recycle-button:hover {

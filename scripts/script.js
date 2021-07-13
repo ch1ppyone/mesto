@@ -26,6 +26,10 @@ const initialCards = [
 ];
 
 const cards = document.querySelector(".cards");
+const cardTemplate = document.querySelector('.card-template').content;
+
+const profileForm = document.querySelector(".popup__form_type-profile");
+const cardForm = document.querySelector(".popup__form_type-card");
 
 const popup = document.querySelectorAll(".popup");
 
@@ -52,7 +56,7 @@ const imagePopupTitle = document.querySelector(".popup__title-image");
 
 document.querySelectorAll(".popup__close-button").forEach(button =>
   button.addEventListener("click", () => {
-    closePopup();
+    closePopup(button.closest('.popup'));
   }));
 
 editPopupButton.addEventListener('click', () => showPopup(editPopup));
@@ -60,62 +64,71 @@ editPopupButton.addEventListener('click', () => {
   profileNameInput.value = nameProfile.textContent;
   profileDescriptionInput.value = descriptionProfile.textContent;
 });
-profileSaveButton.addEventListener('click',
+
+profileForm.addEventListener('submit',
   function (e) {
     e.preventDefault();
     nameProfile.textContent = profileNameInput.value;
     descriptionProfile.textContent = profileDescriptionInput.value;
-    closePopup();
+    closePopup(e.target.closest('.popup'));
+    profileForm.reset();
   }
 );
 
 cardPopupButton.addEventListener('click', () => showPopup(cardPopup));
-cardSaveButton.addEventListener('click',
+cardForm.addEventListener('submit',
   function (e) {
     e.preventDefault();
-    if (cardNameInput.value != "" && cardUrlInput.value != "")
-      addCard(cardNameInput.value, cardUrlInput.value);
-    closePopup();
-    cardNameInput.value = "";
-    cardUrlInput.value = "";
-
+    renderCard(getCardElement(cardNameInput.value, cardUrlInput.value), cards);
+    closePopup(e.target.closest('.popup'));
+    cardForm.reset();
   }
 );
 
-
 document.addEventListener("DOMContentLoaded", function (event) {
   initialCards.forEach((card) => {
-    addCard(card.name, card.link);
+    renderCard(getCardElement(card.name, card.link), cards);
   })
 });
-
-function addCard(title, url) {
-  let template = '<article class="card"> <button class="card__recycle-button"  type="button"></button>  <img src="' + url + '" alt="' + title + '" class="card__image" /> <div class="card__info-container"> <h2 class="card__title">' + title + '</h2> <button class="card__like-button" type="button"></button>  </div</article>';
-  cards.insertAdjacentHTML('beforeend', template);
-
-  document.querySelectorAll(".card__recycle-button").forEach(recycle =>
-    recycle.addEventListener("click", () => {
-      recycle.closest('.card').remove();
-    }));
-
-  document.querySelectorAll(".card__like-button").forEach(like =>
-    like.addEventListener("click", () => {
-      like.classList.toggle('card__like-button_active');
-    }));
-
-  document.querySelectorAll(".card__image").forEach(img =>
-    img.addEventListener("click", () => {
-      imagePopupImg.src = img.getAttribute('src');
-      imagePopupTitle.innerText = img.closest('.card').querySelector('.card__title').textContent;
-      showPopup(imagePopup);
-    }));
-}
 
 function showPopup(popup) {
   popup.classList.add("popup_active");
 }
 
-function closePopup() {
-  popup.forEach((el) =>
-    el.classList.remove("popup_active"));
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
+}
+
+
+function getCardElement(name, link) {
+  const card = cardTemplate.cloneNode(true);
+  const cardImage = card.querySelector('.card__image');
+  const cardText = card.querySelector('.card__title');
+  const cardLike = card.querySelector('.card__like-button');
+  const cardRecycle = card.querySelector('.card__recycle-button');
+
+  cardText.innerText = name;
+  cardImage.src = link;
+  cardImage.alt = name;
+
+  cardLike.addEventListener("click", () => {
+    cardLike.classList.toggle('card__like-button_active');
+  });
+
+  cardImage.addEventListener("click", () => {
+    imagePopupImg.src = link;
+    imagePopupImg.alt = name;
+    imagePopupTitle.innerText = name;
+    showPopup(imagePopup);
+  });
+
+  cardRecycle.addEventListener("click", () => {
+    cardRecycle.closest('.card').remove();
+  });
+
+  return card;
+}
+
+function renderCard(card, container) {
+  container.prepend(card);
 }

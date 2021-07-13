@@ -29,16 +29,25 @@
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
           <button type="button" class="popup__close-button"></button>
-          <form name="edit-profile" action="#" method="post">
+          <form
+            class="popup__form_type-profile"
+            name="edit-profile"
+            action="#"
+            method="post"
+          >
             <input
+              required
               type="text"
               class="popup__input popup__input_type-profile-name"
               name="name"
+              placeholder="Имя"
             />
             <input
+              required
               type="text"
               class="popup__input popup__input_type-profile-description"
               name="description"
+              placeholder="Описание"
             />
             <button
               type="submit"
@@ -54,13 +63,22 @@
         <div class="popup__container">
           <button type="button" class="popup__close-button"></button>
           <h2 class="popup__title">Новое место</h2>
-          <form name="add-card" action="#" method="post">
+          <form
+            name="add-card"
+            class="popup__form_type-card"
+            action="#"
+            method="post"
+          >
             <input
+              required
+              type="text"
               class="popup__input popup__input_type-card-name"
               placeholder="Название"
               name="name"
             />
             <input
+              required
+              type="url"
               class="popup__input popup__input_type-card-url"
               placeholder="Ссылка на картинку"
               name="url"
@@ -78,10 +96,21 @@
       <div class="popup popup-image">
         <div class="popup__image-container">
           <button type="button" class="popup__close-button"></button>
-          <img class="popup__image" alt="Изображение" src="#">
+          <img class="popup__image" alt="Изображение" src="#" />
           <p class="popup__title-image"></p>
         </div>
       </div>
+
+      <template class="card-template">
+        <article class="card">
+          <button class="card__recycle-button" type="button"></button>
+          <img class="card__image" alt="Изображение места" src="#" />
+          <div class="card__info-container">
+            <h2 class="card__title"></h2>
+            <button class="card__like-button" type="button"></button>
+          </div>
+        </article>
+      </template>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
