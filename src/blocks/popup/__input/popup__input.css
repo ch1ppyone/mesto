@@ -4,16 +4,14 @@
   line-height: 17px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 36px 36px 36px;
+  margin: 0 36px 5px 36px;
   width: 100%;
   max-width: 358px;
   padding-bottom: 13px;
   box-sizing: border-box;
 }
 
-.popup__input:last-of-type {
-  margin-bottom: 48px;
-}
+
 
 @media all and (max-width: 528px) {
   .popup__input {
@@ -21,7 +19,4 @@
     max-width: 238px;
   }
 
-  .popup__input:last-of-type {
-    margin-bottom: 45px;
-  }
 }

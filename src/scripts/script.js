@@ -31,7 +31,7 @@ const cardTemplate = document.querySelector('.card-template').content;
 const profileForm = document.querySelector(".popup__form_type-profile");
 const cardForm = document.querySelector(".popup__form_type-card");
 
-const popup = document.querySelectorAll(".popup");
+const popups = document.querySelectorAll(".popup");
 
 const editPopup = document.querySelector(".popup-edit-profile");
 const cardPopup = document.querySelector(".popup-add-card");
@@ -59,7 +59,25 @@ document.querySelectorAll(".popup__close-button").forEach(button =>
     closePopup(button.closest('.popup'));
   }));
 
+
+popups.forEach(popup =>
+  popup.addEventListener("click", (e) => {
+    if (e.target.classList.contains('popup')) {
+      closePopup(popup);
+    }
+  }),
+);
+
+document.addEventListener('keydown', function (e) {
+  const popup = document.querySelector(".popup_active");
+  if (e.key === "Escape")
+    closePopup(popup);
+});
+
+
 editPopupButton.addEventListener('click', () => showPopup(editPopup));
+
+
 editPopupButton.addEventListener('click', () => {
   profileNameInput.value = nameProfile.textContent;
   profileDescriptionInput.value = descriptionProfile.textContent;
