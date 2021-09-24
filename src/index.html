@@ -30,7 +30,7 @@
           <h2 class="popup__title">Редактировать профиль</h2>
           <button type="button" class="popup__close-button"></button>
           <form
-            class="popup__form_type-profile"
+            class="popup__form popup__form_type-profile"
             name="edit-profile"
             action="#"
             method="post"
@@ -44,8 +44,9 @@
               placeholder="Имя"
               minlength="2" 
               maxlength="30"
+              id="name-input"
             />
-            <span class="popup__error">ERR</span>
+            <span class="popup__error name-input-error">ERR</span>
             <input
               required
               type="text"
@@ -54,8 +55,9 @@
               placeholder="Описание" 
               minlength="2" 
               maxlength="200"
+              id="description-input"
             />
-            <span class="popup__error">ERR</span>
+            <span class="popup__error description-input-error">ERR</span>
             <button
               type="submit"
               class="popup__save-button popup__save-button_type-profle"
@@ -72,7 +74,7 @@
           <h2 class="popup__title">Новое место</h2>
           <form
             name="add-card"
-            class="popup__form_type-card"
+            class="popup__form popup__form_type-card"
             action="#"
             method="post"
             novalidate
@@ -85,16 +87,18 @@
               name="name"
               minlength="2" 
               maxlength="30"
+              id="card-name-input"
             />
-            <span class="popup__error">ERR</span>
+            <span class="popup__error card-name-input-error">ERR</span>
             <input
               required
               type="url"
               class="popup__input popup__input_type-card-url"
               placeholder="Ссылка на картинку"
               name="url"
+              id="card-url-input"
             />
-            <span class="popup__error">ERR</span>
+            <span class="popup__error card-url-input-error">ERR</span>
             <button
               class="popup__save-button popup__save-button_type-card"
               type="submit"
