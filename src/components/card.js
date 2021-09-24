@@ -1,4 +1,7 @@
+import * as modals from '../components/modal.js';
 
+const cards = document.querySelector(".cards");
+const cardTemplate = document.querySelector('.card-template').content;
 
 const initialCards = [
   {
@@ -27,10 +30,9 @@ const initialCards = [
   }
 ];
 
-
-const cards = document.querySelector(".cards");
-const cardTemplate = document.querySelector('.card-template').content;
-
+initialCards.forEach((card) => {
+  renderCard(getCardElement(card.name, card.link), cards);
+})
 
 function getCardElement(name, link) {
   const card = cardTemplate.cloneNode(true);
@@ -48,10 +50,13 @@ function getCardElement(name, link) {
   });
 
   cardImage.addEventListener("click", () => {
+    const imagePopup = document.querySelector(".popup-image");
+    const imagePopupImg = document.querySelector(".popup__image");
+    const imagePopupTitle = document.querySelector(".popup__title-image");
     imagePopupImg.src = link;
     imagePopupImg.alt = name;
     imagePopupTitle.innerText = name;
-    showPopup(imagePopup);
+    modals.showPopup(imagePopup);
   });
 
   cardRecycle.addEventListener("click", () => {
@@ -60,11 +65,9 @@ function getCardElement(name, link) {
 
   return card;
 }
-
 function renderCard(card, container) {
   container.prepend(card);
 }
 
-initialCards.forEach((card) => {
-  renderCard(getCardElement(card.name, card.link), cards);
-})
+
+export { renderCard, getCardElement }

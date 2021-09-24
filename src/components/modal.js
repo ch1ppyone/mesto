@@ -1,7 +1,3 @@
-
-
-
-
 const popups = document.querySelectorAll(".popup");
 
 document.querySelectorAll(".popup__close-button").forEach(button =>
