@@ -70,4 +70,4 @@ function renderCard(card, container) {
 }
 
 
-export { renderCard, getCardElement }
+export { renderCard, getCardElement, cards }

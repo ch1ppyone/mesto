@@ -1,8 +1,8 @@
-import * as modals from './components/modal.js';
-import * as validate from './components/validate.js';
-import * as cards from './components/card.js';
-import * as profile from './components/utils.js';
-import './pages/index.css';
+import * as modals from '../components/modal.js';
+import * as validate from '../components/validate.js';
+import * as cards from '../components/card.js';
+import * as profile from '../components/utils.js';
+import '../pages/index.css';
 
 
 const editPopup = document.querySelector(".popup-edit-profile");
@@ -29,7 +29,7 @@ cardPopupButton.addEventListener('click', () =>  modals.showPopup(cardPopup));
 cardForm.addEventListener('submit',
     function (e) {
         e.preventDefault();
-        renderCard(getCardElement(cardNameInput.value, cardUrlInput.value), cards);
+        cards. renderCard(cards.getCardElement(cardNameInput.value, cardUrlInput.value), cards.cards);
         modals.closePopup(e.target.closest('.popup'));
         cardForm.reset();
     }
