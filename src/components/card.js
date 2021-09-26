@@ -57,6 +57,7 @@ function getCardElement(name, link) {
     imagePopupImg.alt = name;
     imagePopupTitle.innerText = name;
     modals.showPopup(imagePopup);
+
   });
 
   cardRecycle.addEventListener("click", () => {

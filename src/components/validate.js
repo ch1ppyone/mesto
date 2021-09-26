@@ -20,6 +20,7 @@ const checkInputValidity = (formElement, inputElement, obj) => {
     }
 };
 
+
 const setEventListeners = (formElement, obj) => {
     const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
     const buttonElement = formElement.querySelector(obj.submitButtonSelector);
@@ -50,6 +51,7 @@ function hasInvalidInput(inputList) {
 };
 
 function toggleButtonState(inputList, buttonElement, obj) {
+
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(obj.inactiveButtonClass);
     } else {
@@ -57,7 +59,17 @@ function toggleButtonState(inputList, buttonElement, obj) {
     }
 };
 
+function resetValidation(form) {
+    const btn = form.querySelector('.popup__save-button');
+    btn.classList.add("popup__save-button_disabled");
+}
 
 
 
-  export {enableValidation}
+
+
+
+
+
+
+export { enableValidation, resetValidation, hasInvalidInput }

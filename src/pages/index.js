@@ -23,15 +23,16 @@ const cardSaveButton = document.querySelector('.popup__save-button_type-card');
 const editPopupButton = document.querySelector(".profile__edit-button");
 editPopupButton.addEventListener('click', () => modals.showPopup(editPopup));
 const cardPopupButton = document.querySelector(".profile__add-button");
-cardPopupButton.addEventListener('click', () =>  modals.showPopup(cardPopup));
+cardPopupButton.addEventListener('click', () => modals.showPopup(cardPopup));
 
 
 cardForm.addEventListener('submit',
     function (e) {
         e.preventDefault();
-        cards. renderCard(cards.getCardElement(cardNameInput.value, cardUrlInput.value), cards.cards);
+        cards.renderCard(cards.getCardElement(cardNameInput.value, cardUrlInput.value), cards.cards);
         modals.closePopup(e.target.closest('.popup'));
         cardForm.reset();
+        validate.resetValidation(cardForm);
     }
 );
 
@@ -48,7 +49,6 @@ profileForm.addEventListener('submit',
 editPopupButton.addEventListener('click', () => {
     profileNameInput.value = nameProfile.textContent;
     profileDescriptionInput.value = descriptionProfile.textContent;
-    validate.enableValidation();
 });
 
 validate.enableValidation({
@@ -58,7 +58,8 @@ validate.enableValidation({
     inactiveButtonClass: 'popup__save-button_disabled',
     inputErrorClass: 'popup__input_type-error',
     errorClass: 'popup__error_visible'
-  }); 
+});
+
 
 
 
