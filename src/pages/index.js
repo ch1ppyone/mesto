@@ -21,9 +21,8 @@ const cardUrlInput = document.querySelector('.popup__input_type-card-url');
 const cardSaveButton = document.querySelector('.popup__save-button_type-card');
 
 const editPopupButton = document.querySelector(".profile__edit-button");
-editPopupButton.addEventListener('click', () => modals.showPopup(editPopup));
 const cardPopupButton = document.querySelector(".profile__add-button");
-cardPopupButton.addEventListener('click', () => modals.showPopup(cardPopup));
+
 
 
 cardForm.addEventListener('submit',
@@ -49,7 +48,10 @@ profileForm.addEventListener('submit',
 editPopupButton.addEventListener('click', () => {
     profileNameInput.value = nameProfile.textContent;
     profileDescriptionInput.value = descriptionProfile.textContent;
+    modals.showPopup(editPopup);
 });
+
+cardPopupButton.addEventListener('click', () => modals.showPopup(cardPopup));
 
 validate.enableValidation({
     formSelector: '.popup__form',

@@ -18,24 +18,23 @@ popups.forEach(popup =>
 
 
 function showPopup(popup) {
-    popup.addEventListener('keydown', closeEsc(popup));
     popup.classList.add("popup_active");
+    document.addEventListener('keydown', closeEsc);
 }
 
 function closePopup(popup) {
-    popup.removeEventListener('keydown', closeEsc(popup));
     popup.classList.remove("popup_active");
+    document.removeEventListener('keydown', closeEsc);
 }
 
 
-function closeEsc(popup)
-{
-    document.addEventListener('keydown', function (e) {
-        if (e.key === "Escape")
-            closePopup(popup);
-    });
+function closeEsc(e) {
+    if (e.key === "Escape") {
+        const popup =  document.querySelector(".popup_active");
+        closePopup(popup);
+    }
 }
 
 
 
-export {showPopup, closePopup}
+export { showPopup, closePopup }
