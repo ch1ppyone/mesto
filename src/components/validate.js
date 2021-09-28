@@ -54,14 +54,17 @@ function toggleButtonState(inputList, buttonElement, obj) {
 
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(obj.inactiveButtonClass);
+        buttonElement.disabled = true;
     } else {
         buttonElement.classList.remove(obj.inactiveButtonClass);
+        buttonElement.disabled = false;
     }
 };
 
 function resetValidation(form) {
     const btn = form.querySelector('.popup__save-button');
     btn.classList.add("popup__save-button_disabled");
+    btn.disabled = true;
 }
 
 
