@@ -48,7 +48,7 @@ cardForm.addEventListener('submit',
     function (e) {
         e.preventDefault();
         api.uploadCard({ 'name': cardNameInput.value, 'link': cardUrlInput.value }).then((res) => {
-            cards.renderCard(cards.getCardElement(rss, user));
+            cards.renderCard(cards.getCardElement(res, user));
         })
             .catch((err) => {
                 console.log(err);
