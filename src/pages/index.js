@@ -47,16 +47,18 @@ Promise.all([api.getCards(), api.getUser()])
 cardForm.addEventListener('submit',
     function (e) {
         e.preventDefault();
+        cardSaveButton.textContent = "Создание...";
         api.uploadCard({ 'name': cardNameInput.value, 'link': cardUrlInput.value }).then((res) => {
             cards.renderCard(cards.getCardElement(res, user));
+            modals.closePopup(e.target.closest('.popup'));
+            cardForm.reset();
+            validate.resetValidation(cardForm);
         })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
-                modals.closePopup(e.target.closest('.popup'));
-                cardForm.reset();
-                validate.resetValidation(cardForm);
+                cardSaveButton.textContent = "Создать";
             })
     }
 
@@ -68,14 +70,14 @@ profileForm.addEventListener('submit',
         profileSaveButton.textContent = "Сохранение...";
         api.editProfile(profileNameInput.value, profileDescriptionInput.value).then((res) => {
             updateProfile(res.name, res.about, res.avatar);
+            modals.closePopup(e.target.closest('.popup'));
+            profileForm.reset();
         })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
                 profileSaveButton.textContent = "Сохранить";
-                modals.closePopup(e.target.closest('.popup'));
-                profileForm.reset();
             })
     }
 );
@@ -98,14 +100,14 @@ avatarForm.addEventListener('submit',
         avatarSaveButton.textContent = "Сохранение...";
         api.updateAvatar(avatarUrlInput.value).then((res) => {
             avatarImg.src = res.avatar;
+            modals.closePopup(e.target.closest('.popup'));
+            avatarForm.reset();
         })
             .catch((err) => {
                 console.log(err);
             })
             .finally(() => {
                 avatarSaveButton.textContent = "Сохранить";
-                modals.closePopup(e.target.closest('.popup'));
-                avatarForm.reset();
             })
     }
 );
