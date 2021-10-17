@@ -56,7 +56,6 @@ export class Api {
         }).then(this._getResponse)
     }
 
-
     like = (card) => {
         return fetch(`${this._url}/cards/likes/` + card._id, {
             method: 'PUT',
@@ -79,7 +78,6 @@ export class Api {
     }
 
 }
-
 
 export const api = new Api  ({
     url: 'https://nomoreparties.co/v1/plus-cohort-1',
