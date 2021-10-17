@@ -1,42 +1,60 @@
-import { api } from '../components/api.js';
-import {userData} from '../components/utils.js';
+import { api } from './Api.js';
 
 export class Card {
   constructor(cardData, templateSelector) {
     this._cardData = cardData;
     this._templateSelector = templateSelector;
+    this._getCardElement();
+  }
+
+  _isUserLike() {
+    let myid = localStorage.getItem('userId');
+    this._cardData.likes.some(function (elem) {
+      if (elem._id === myid)
+        return true;
+      else return false;
+    })
   }
 
   _getCardElement() {
+    this._card = this._templateSelector.cloneNode(true);
 
+    let myid = localStorage.getItem('userId');
 
-    const card = this._templateSelector.cloneNode(true);
-    const cardImage = card.querySelector('.card__image');
-    const cardText = card.querySelector('.card__title');
-    const cardLike = card.querySelector('.card__like-button');
-    const cardRecycle = card.querySelector('.card__recycle-button');
-    const counter = card.querySelector('.card__like-counter');
-    cardText.innerText = this._cardData.name;
-    cardImage.src = this._cardData.link;
-    cardImage.alt = this._cardData.name;
+    this._cardImage = this._card.querySelector('.card__image');
+    this._cardText = this._card.querySelector('.card__title');
+    this._cardLike = this._card.querySelector('.card__like-button');
+    this._cardRecycle = this._card.querySelector('.card__recycle-button');
+    this._counter = this._card.querySelector('.card__like-counter');
 
-    const isUserLike = this._cardData.likes.some(function (elem) {
-      if (elem._id === userData._id) {
-        return true;
-      }
+    this._cardText.innerText = this._cardData.name;
+    this._cardImage.src = this._cardData.link;
+    this._cardImage.alt = this._cardData.name;
+    this._counter.innerText = this._cardData.likes.length;
+
+    if (this._isUserLike()) {
+      this._cardLike.classList.add("card__like-button_active");
+    }
+
+    if (this._cardData.owner._id !== myid) {
+      this._cardRecycle.style.display = "none";
+    }
+
+    this._setEventListners();
+    return this._card;
+
+  }
+
+  _setEventListners() {
+
+    this._cardRecycle.addEventListener("click", () => {
+      api.deleteCard(this._cardData).then((res) => {
+        this._cardRecycle.closest('.card').remove();
+      })
     });
 
-    counter.innerText = this._cardData.likes.length;
 
-    if (isUserLike) {
-      cardLike.classList.add("card__like-button_active");
-    }
-
-    if (this._cardData.owner._id !== userData._id) {
-      cardRecycle.style.display = "none";
-    }
-
-    cardImage.addEventListener("click", () => {
+    this._cardImage.addEventListener("click", () => {
       const imagePopup = document.querySelector(".popup-image");
       const imagePopupImg = document.querySelector(".popup__image");
       const imagePopupTitle = document.querySelector(".popup__title-image");
@@ -46,35 +64,21 @@ export class Card {
       modals.showPopup(imagePopup);
     });
 
-    cardRecycle.addEventListener("click", () => {
-      api.deleteCard(this._cardData).then((res) => {
-        cardRecycle.closest('.card').remove();
-      })
-    });
-
-    cardLike.addEventListener("click", () => {
-
-      if (cardLike.classList.contains("card__like-button_active")) {
+    this._cardLike.addEventListener("click", () => {
+      if (this._cardLike.classList.contains("card__like-button_active")) {
         api.unlike(this._cardData).then((res) => {
-          cardLike.classList.remove("card__like-button_active");
-          if (counter.innerText > 0)
-            counter.innerText--;
+          this._cardLike.classList.remove("card__like-button_active");
+          if (this._counter.innerText > 0)
+            this._counter.innerText--;
         })
       }
       else {
         api.like(this._cardData).then((res) => {
-          cardLike.classList.add("card__like-button_active");
-          counter.innerText++;
+          this._cardLike.classList.add("card__like-button_active");
+          this._counter.innerText++;
         })
       }
     });
-    return card;
   }
-
-  renderCard(container) {
-    container.prepend(this._getCardElement());
-  }
-
 }
-
 

@@ -1,9 +1,11 @@
+import { api } from '../components/Api.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 import * as modals from '../components/modal.js';
 import * as validate from '../components/validate.js';
-import { api } from '../components/api.js';
-import { Card } from '../components/card.js';
-import * as user from  '../components/utils.js';
 import '../pages/index.css';
+
 
 
 const editPopup = document.querySelector(".popup-edit-profile");
@@ -11,9 +13,6 @@ const profileForm = document.querySelector(".popup__form_type-profile");
 const profileNameInput = document.querySelector('.popup__input_type-profile-name');
 const profileDescriptionInput = document.querySelector('.popup__input_type-profile-description');
 const profileSaveButton = document.querySelector('.popup__save-button_type-profle');
-const nameProfile = document.querySelector('.profile__name');
-const descriptionProfile = document.querySelector('.profile__description');
-const avatarImg = document.querySelector('.profile__avatar');
 
 const avatarPopup = document.querySelector(".popup-edit-avatar");
 const avatarForm = document.querySelector(".popup__form_type-avatar");
@@ -31,24 +30,48 @@ const cardPopupButton = document.querySelector(".profile__add-button");
 const avatarPopupButton = document.querySelector(".profile__avatar-button");
 
 const cardTemplate = document.querySelector('.card-template').content;
-const cards = document.querySelector(".cards");
+const cardsContainer = document.querySelector(".cards");
+
+let cardsSection;
+const cardsList = [];
+
+const userInfo = new UserInfo(
+    {
+        name: '.profile__name',
+        about: '.profile__description',
+        avatar: '.profile__avatar'
+    }
+);
 
 
 
 Promise.all([api.getCards(), api.getUser()])
     .then(([cardsData, userData]) => {
+
+        localStorage.setItem('userId', userData._id);
+
+        userInfo.setUserInfo(
+            {
+                name: userData.name,
+                about: userData.about,
+                avatar: userData.avatar
+            });
+
         cardsData.reverse();
         cardsData.forEach((cardData) => {
-            user.userData = userData;
-            updateProfile(userData.name, userData.about, userData.avatar);
-            const card = new Card(cardData, cardTemplate);
-            card.renderCard(cards);
-           
+            cardsList.push(new Card(cardData, cardTemplate)._card);
         })
+
+        cardsSection = new Section(cardsList, cardsContainer);
+        cardsSection.renderAll();
+
+
     })
     .catch((err) => {
         console.log(err)
     })
+
+
 
 cardForm.addEventListener('submit',
     function (e) {
@@ -75,7 +98,7 @@ profileForm.addEventListener('submit',
         e.preventDefault();
         profileSaveButton.textContent = "Сохранение...";
         api.editProfile(profileNameInput.value, profileDescriptionInput.value).then((res) => {
-            updateProfile(res.name, res.about, res.avatar);
+            userInfo.setUserInfo({ name: res.name, about: res.about, avatsr: res.avatar })
             modals.closePopup(e.target.closest('.popup'));
             profileForm.reset();
         })
@@ -89,8 +112,9 @@ profileForm.addEventListener('submit',
 );
 
 editPopupButton.addEventListener('click', () => {
-    profileNameInput.value = nameProfile.textContent;
-    profileDescriptionInput.value = descriptionProfile.textContent;
+    const info = userInfo.getUserInfo();
+    profileNameInput.value = info.name;
+    profileDescriptionInput.value = info.about;
     modals.showPopup(editPopup);
 });
 
@@ -120,11 +144,7 @@ avatarForm.addEventListener('submit',
 
 cardPopupButton.addEventListener('click', () => modals.showPopup(cardPopup));
 
-function updateProfile(name, description, avatar) {
-    nameProfile.textContent = name;
-    descriptionProfile.textContent = description;
-    avatarImg.src = avatar;
-}
+
 
 validate.enableValidation({
     formSelector: '.popup__form',
@@ -134,8 +154,6 @@ validate.enableValidation({
     inputErrorClass: 'popup__input_type-error',
     errorClass: 'popup__error_visible'
 });
-
-
 
 
 

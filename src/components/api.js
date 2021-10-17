@@ -1,4 +1,4 @@
-class Api {
+export class Api {
 
     constructor(config) {
         this._url = config.url;
@@ -23,7 +23,6 @@ class Api {
             headers: this._headers
         }).then(this._getResponse)
     }
-
 
     uploadCard = (card) => {
         return fetch(`${this._url}/cards`, {
@@ -81,20 +80,14 @@ class Api {
 
 }
 
-export const api = new Api({
+
+export const api = new Api  ({
     url: 'https://nomoreparties.co/v1/plus-cohort-1',
     headers: {
         authorization: '6f352adb-fe9c-4435-918f-15caedc4402a',
         'Content-Type': 'application/json'
     }
 });
-
-
-
-
-
-
-
 
 
 
