@@ -1,8 +1,8 @@
 import * as modals from '../components/modal.js';
 import * as validate from '../components/validate.js';
-import * as cards from '../components/card.js';
-import * as api from '../components/api.js';
-import * as profile from '../components/utils.js';
+import { api } from '../components/api.js';
+import { Card } from '../components/card.js';
+import * as user from  '../components/utils.js';
 import '../pages/index.css';
 
 
@@ -29,15 +29,21 @@ const cardSaveButton = document.querySelector('.popup__save-button_type-card');
 const editPopupButton = document.querySelector(".profile__edit-button");
 const cardPopupButton = document.querySelector(".profile__add-button");
 const avatarPopupButton = document.querySelector(".profile__avatar-button");
-let user = undefined;
+
+const cardTemplate = document.querySelector('.card-template').content;
+const cards = document.querySelector(".cards");
+
+
 
 Promise.all([api.getCards(), api.getUser()])
     .then(([cardsData, userData]) => {
         cardsData.reverse();
         cardsData.forEach((cardData) => {
-            user = userData;
-            cards.renderCard(cards.getCardElement(cardData, userData));
+            user.userData = userData;
             updateProfile(userData.name, userData.about, userData.avatar);
+            const card = new Card(cardData, cardTemplate);
+            card.renderCard(cards);
+           
         })
     })
     .catch((err) => {
@@ -49,7 +55,7 @@ cardForm.addEventListener('submit',
         e.preventDefault();
         cardSaveButton.textContent = "Создание...";
         api.uploadCard({ 'name': cardNameInput.value, 'link': cardUrlInput.value }).then((res) => {
-            cards.renderCard(cards.getCardElement(res, user));
+            cards.renderCard(cards.getCardElement(res, user.userData));
             modals.closePopup(e.target.closest('.popup'));
             cardForm.reset();
             validate.resetValidation(cardForm);
